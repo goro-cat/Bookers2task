@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:update, :edit]
+  #onlyなくて大丈夫
 
   def show
     @user = User.find(params[:id])
