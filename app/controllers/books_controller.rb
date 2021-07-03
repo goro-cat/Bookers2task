@@ -4,8 +4,11 @@ class BooksController < ApplicationController
 
   def show
     @book_new = Book.new
-    @book = Book.find(params[:id])
+    @book = Book.find(params[:id])##コメントのshowの時も使用
     @user = @book.user
+    
+    @book_comment = BookComment.new
+    
   end
 
   def index
@@ -53,6 +56,10 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+  
+  def book_comment_params
+    params.require(:book_comment).permit(:comment)
   end
 
   def ensure_correct_user
