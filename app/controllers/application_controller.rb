@@ -7,12 +7,11 @@ class ApplicationController < ActionController::Base
 
   protected
   def after_sign_in_path_for(resource)
-    user_path(current_user)
+    user_path(current_user)##ログイン後user詳細ページに飛ぶように変更
   end
 
   def after_sign_out_path_for(resource)
-    #root_path
-    user_path(resource)##ログイン後user詳細ページに飛ぶように変更
+    root_path
   end
 
   def configure_permitted_parameters

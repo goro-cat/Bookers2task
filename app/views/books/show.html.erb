@@ -20,13 +20,13 @@
           <td><% if @book.favorited_by?(current_user) %>
             <p>
   　         <%= link_to book_favorites_path(@book), method: :delete do %>
-  　            ♥<%= @book.favorites.count %>
+  　           <i class="fas fa-heart unlike-btn"></i><%= @book.favorites.count %>
             <% end %>
             </p>
             <% else %>
             <p>
             <%= link_to book_favorites_path(@book), method: :post do %>
-              ♥<%= @book.favorites.count %>
+              <i class="fas fa-heart like-btn"></i><%= @book.favorites.count %>
             <% end %>
             </p>
             <% end %>
@@ -46,7 +46,7 @@
           <tbody>
             <% @book.book_comments.each do |book_comment| %>
             <tr>
-              <td><%= attachment_image_tag(book_comment.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
+              <td><%= attachment_image_tag(book_comment.user, :profile_image,format: 'jpeg', fallback: "no-image-icon.jpg", size: "50x50" ) %>
                   <%= book_comment.user.name %>
               </td>
               <td><%= book_comment.comment %>
