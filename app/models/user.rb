@@ -7,7 +7,33 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-  
+
+  #@user.followersとした時に @user.idがfollower_id
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower#フォロー所得
+  has_many :following_user, through: :follower, source: :followed#followersを通してsourceの元にたどり着く/自分がフォローしている人
+
+  #@user.reverse_followersとした時 @user.idがfollowed_id
+  has_many :followed, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy, inverse_of: :followed#フォローワー取得
+  has_many :follower_user, through: :followed, source: :follower##自分をフォローしている人
+
+  ##フォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+
+  ##フォロー解除する
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
+  end
+
+
+  ##フォローしているか確認・フォローしてればtrue返す
+  def following?(user)
+    following_user.include?(user)
+  end
+
+
+
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
