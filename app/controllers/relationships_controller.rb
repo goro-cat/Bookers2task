@@ -13,6 +13,7 @@ class RelationshipsController < ApplicationController
     redirect_to request.referer
   end
   
+
   ###relationshipで一覧画面を表示させたかったが、アクションがうまくいかないため、参考サイトのようにuserに変更###
   #def follower
   #  @users = User.all(params[:user_id])
@@ -21,6 +22,17 @@ class RelationshipsController < ApplicationController
   #def followed
   #  @users = User.all
   #end
+  #################解答例############################################################################################
+  #def followings
+	#	user = User.find(params[:user_id])
+	#	@users = user.followings
+  #end
+
+  #def followers
+	#	user = User.find(params[:user_id])
+	#	@users = user.followers
+  end
+
   ###############################################################################################################
   
   #def follow
