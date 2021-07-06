@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'home/about' => 'homes#about'#, as: 'about'
   devise_for :users##これをresourcesより上に持ってくる
+  get 'search' => 'searches#search'
+  get 'search/index' => 'searches#index'
 
   resources :users,only: [:show,:index,:edit,:update] do
     member do
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   resources :books do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
+    resource :searches, only:[:serch, :index]
   end
 
 

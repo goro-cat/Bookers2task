@@ -32,6 +32,8 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
   
+  
+  ##
   ######################解答例###########################################################################
   # 自分がフォローされる（被フォロー）側の関係性
   #has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
