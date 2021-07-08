@@ -26,13 +26,21 @@
   <div class="search-form">
     <%= form_with url: search_index_path, method: :get, local: true do |f| %>
       <%= f.text_field :keyword, value: @keyword %>
-    <%# end %>
+      <!--<%#= form.select :保存されるカラム名(ここで初めて作成、params[:カラム名]で所得可能), [ ["表示される文字","保存される値"（自分が分かるように）], ["表示される文字","保存される値"] ], {オプション}, {htmlオプション} %>-->
       <%= f.select :model, [["User", User ], ["Book", Book]] %>
-    <%# end %>
       <%= f.select :search_way, [["完全一致", 1 ],["前方一致", 2 ],["後方一致", 3 ],["部分一致", 4 ]] %>
-
       <%= f.submit "検索" %>
     <% end %>
   </div>
   <% end %>
 </header>
+
+<!--模範解答-------------------------------------------------------------------------------------------------------------------------------------------------
+<div class="search-form">
+  <%#= form_with url: search_path, method: :get, local: true do |f| %>
+    <%#= f.text_field :content %>
+    <%#= f.select :model, options_for_select({ "User" => "user", "Book" => "book" }) %>
+    <%#= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
+    <%#= f.submit '検索' %>
+  <%# end %>
+</div>------------------------------------------------------------------------------------------------------------------------------------------------------>
