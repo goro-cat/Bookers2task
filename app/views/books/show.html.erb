@@ -32,12 +32,12 @@
         </tr>
       </table>
 
-      <div class="commentOutline">
-        <%= render 'books/comments', book: @book, id: "commentsArea" %>
+      <div class="commentOutline", id="commentsArea">
+        <%= render 'books/comments', book: @book %>
       </div>
 
       <div class="bottomInput">
-        <%= form_with(model:[@book, @book_comment], id: "new-comment") do |f| %>
+        <%= form_with(model:[@book, @book_comment], id: "new-comment", remote: true) do |f| %>
           <%= f.text_area :comment, class: "inputComment", rows:'8', placeholder: "コメントをここに", size: "50" %>
           <p><%= f.submit "送信" %></p>
         <% end %>
