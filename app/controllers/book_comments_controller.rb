@@ -10,13 +10,18 @@ class BookCommentsController < ApplicationController
     #comment.user_id = current_user.id
     @comment.book_id = @book.id
     @comment.save
+    #unless @comment.save
+    #  render 'error'
+    #end
   end
 
   def destroy
     @book = Book.find(params[:book_id])
     BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-    
-    redirect_back(fallback_location: book_path(params[:book_id]))#destroy.jw.erbにいくためなし
+    #上記と下記同義
+    #book_comment = @book.book_comments.find(params[:id])
+    #book_comment.destroy
+    #redirect_back(fallback_location: book_path(params[:book_id]))#destroy.jw.erbにいくためなし
   end
 
   private

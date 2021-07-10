@@ -12,7 +12,7 @@ class RelationshipsController < ApplicationController
     Relationship.find_by(follower_id: current_user.id, followed_id:params[:id]).destroy##フォローしている人のユーザが現在のユーザのときフォローされているユーザをみつけるデストロイ可
     redirect_to request.referer
   end
-  
+
 
   ###relationshipで一覧画面を表示させたかったが、アクションがうまくいかないため、参考サイトのようにuserに変更###
   #def follower
@@ -31,10 +31,10 @@ class RelationshipsController < ApplicationController
   #def followers
 	#	user = User.find(params[:user_id])
 	#	@users = user.followers
-  end
+  #end
 
   ###############################################################################################################
-  
+
   #def follow
   #  current_user.follow(params[:id])
   #  redirect_to request.referer

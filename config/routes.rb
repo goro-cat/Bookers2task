@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'chats/:id' => 'chats#show', as: 'chat'
+  resources :chats, only: [:create]
+
   get 'relationships/create'
   get 'relationships/destroy'
   root 'homes#top'

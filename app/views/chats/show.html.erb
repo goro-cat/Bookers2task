@@ -1,0 +1,46 @@
+<div class='container'>
+  <h2><%= @user.name %>さんとのチャット</h2>
+  <div class="row">
+    <div class="col-4">
+      <%= form_with model: @chat do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id %><!--実際に表示はされないが、paramsとして送りたいものを送るときに活用-->
+        <%= f.submit %>
+      <% end %>
+    </div>
+    <div class="col-8">
+      <table class="table-dark">
+        <thead>
+          <tr>
+            <th style="width:15%"></th>
+            <th style="width:40%"></th>
+            <th style="width:15%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @chats.each do |chat| %>
+          <tr>
+            <% if current_user == chat.user %>
+            <td><%= chat.user.name %></td>
+            <% else %>
+            <td></td>
+            <% end %>
+
+            <% if current_user == chat.user %>
+            <td><%= chat.message %></td>
+            <% else %>
+            <td class="text-right"><%= chat.message %></td>
+            <% end %>
+
+            <% if current_user != chat.user %>
+            <td class="text-right"><%= chat.user.name %></td>
+            <% else %>
+            <td></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

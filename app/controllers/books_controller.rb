@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+ before_action :authenticate_user!
  before_action :ensure_correct_user, only: [:update, :edit]
  #onlyなくて大丈夫
 
@@ -8,11 +9,17 @@ class BooksController < ApplicationController
     @user = @book.user
     @book_comment = BookComment.new
     @comments = @book.book_comments.all
+    impressionist(@book, nil, unique: [:ip_address])
+    ##tweet詳細ページにアクセスするとPV数が1つ増える。
   end
 
   def index
     @book = Book.new
-    @books = Book.all
+    #@books = Book.all
+    @books = Book.includes(:favorited_users).
+      sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    ##要素同士の比較は <=> 演算子を使って行います。sort はソートされた配列を生成して返します。
+    ##a.favorited_users.size、b.favorited_users.size が表しているのはそれぞれ各投稿のいいね数。
   end
 
   def create
@@ -56,7 +63,7 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  
+
   def book_comment_params
     params.require(:book_comment).permit(:comment)
   end

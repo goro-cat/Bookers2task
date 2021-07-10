@@ -25,6 +25,8 @@
 <div><% unless user == current_user %>
         <% if current_user.following?(user) %>
           <%= link_to 'フォロー外す', unfollow_path(user.id), method: :post, class: "btn btn-success btn-block mb-5" %>
+          <%#= フォローした人とのチャットを始める %>
+          <%= link_to 'chatを始める', chat_path(user.id) %>
         <% else %>
           <%= link_to 'フォローする', follow_path(user.id), method: :post, class: "btn btn-success btn-block mb-5" %>
         <% end %>
